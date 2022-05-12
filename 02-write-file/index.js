@@ -8,14 +8,22 @@ const rl = readline.createInterface({
     output: stdout
 });
 
-rl.setPrompt('Hello!\n');
+rl.setPrompt('Hello! Write here 🠗\n');
 
 rl.prompt();
+
+fs.appendFile(
+    path.join(__dirname, 'text.txt'),
+    '',
+    (err) => {
+        if (err) throw err;
+    }
+);
 
 rl.on('line', (input) => {
     if(input === 'exit') {
         rl.close();
-        input = '';
+        return;
     }
     fs.appendFile(
         path.join(__dirname, 'text.txt'),
@@ -23,7 +31,7 @@ rl.on('line', (input) => {
         (err) => {
             if (err) throw err;
         }
-    );    
+    );   
 });
 
 rl.on('close', () => {
