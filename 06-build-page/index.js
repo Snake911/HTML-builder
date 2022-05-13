@@ -5,6 +5,7 @@ const buildDir = 'project-dist';
 
 (async function build() {
     // Собираем шаблон
+    await fs.promises.rm(path.join(__dirname, buildDir), {recursive: true, force: true});
     await fs.promises.mkdir(path.join(__dirname, buildDir), {recursive: true});
     let template = (await fs.promises.readFile(path.join(__dirname, 'template.html'))).toString();
     while(template.indexOf('{{') !== -1) {
