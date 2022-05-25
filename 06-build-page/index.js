@@ -9,7 +9,7 @@ const buildDir = 'project-dist';
     await fs.promises.mkdir(path.join(__dirname, buildDir), {recursive: true});
     let template = (await fs.promises.readFile(path.join(__dirname, 'template.html'))).toString();
     while(template.indexOf('{{') !== -1) {
-        const component = template.match(/{{(.*)}}/)[1];
+        const component = template.match(/{{(.*?)}}/)[1];
         const componentCode = (await fs.promises.readFile(path.join(__dirname, 'components', component + '.html'))).toString();
         const compNameReg = new RegExp(`{{${component}}}`);
         template = template.replace(compNameReg, componentCode);
